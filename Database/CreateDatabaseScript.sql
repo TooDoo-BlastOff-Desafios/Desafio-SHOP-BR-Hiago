@@ -1,0 +1,89 @@
+CREATE DATABASE  [SHOPBR]
+
+USE [SHOPBR]
+
+CREATE TABLE [Produto]
+(
+    [Id] UNIQUEIDENTIFIER NOT NULL,
+    [Nome] NVARCHAR(80) NOT NULL,
+    [Tipo] NVARCHAR(50) NOT null,
+    [Marca] NVARCHAR(50) NOT null,
+    [Preco] DECIMAL NOT NULL,
+    CONSTRAINT [PK_Produto] PRIMARY KEY([Id])
+)
+GO
+
+CREATE TABLE [Loja]
+(
+    [Id] UNIQUEIDENTIFIER NOT NULL,
+    [Nome] NVARCHAR(80) NOT NULL,
+    [Endereco] NVARCHAR(120) NOT NULL,
+    [Telefone] NVARCHAR(13) NOT NULL,
+    [Email] NVARCHAR(120)
+
+)
+GO 
+
+CREATE TABLE [ProdutoEmLoja]
+(
+    [LojaId] UNIQUEIDENTIFIER NOT NULL,
+    [ProdutoId] UNIQUEIDENTIFIER NOT NULL,
+    [Quantidade] INT
+
+    CONSTRAINT [PK_ItemCarreira] PRIMARY KEY ([LojaId], [ProdutoId]),
+
+)
+GO 
+
+CREATE TABLE [Cliente]
+(
+    [Id] UNIQUEIDENTIFIER NOT NULL,
+    [Nome] NVARCHAR(80) NOT NULL,
+    [Endereco] NVARCHAR(120) NOT NULL,
+    [Telefone] NVARCHAR(13) ,
+    [CEP] NVARCHAR(9) NOT NULL,
+    [Email] NVARCHAR(120) NOT NULL ,
+    [Senha] NVARCHAR(24) NOT NULL,
+    [Nivel] TINYINT NOT NULL CHECK([Nivel] IN(1,2,3))
+
+    CONSTRAINT [PK_CLiente] PRIMARY KEY ([Id]),
+
+)
+GO
+
+CREATE TABLE [Compras]
+(
+    [Id] UNIQUEIDENTIFIER NOT NULL,
+    [ProdutoId] UNIQUEIDENTIFIER NOT NULL,
+    [ClienteId] UNIQUEIDENTIFIER NOT NULL,
+    [CorreioId] UNIQUEIDENTIFIER not NULL,
+    [Quantidade] INT NOT NULL,
+
+    CONSTRAINT [PK_Compras] PRIMARY KEY ([Id]),
+    
+
+
+
+)
+GO
+
+CREATE TABLE [Correio]
+(
+    [Id] UNIQUEIDENTIFIER NOT NULL,
+    [Prazo] TINYINT NOT NULL,
+    [CustoFrete] FLOAT NOT NULL,
+
+
+
+)
+
+CREATE  TABLE [Avaliacao]
+(
+    [ClienteId] UNIQUEIDENTIFIER NOT NULL,
+    [ProdutoID] UNIQUEIDENTIFIER NOT NULL,
+    [Avaliacao] TINYINT NOT NULL CHECK([Avaliacao] IN(1,2,3, 4, 5))
+
+    CONSTRAINT [PK_Avaliacao] PRIMARY KEY ([ClienteId], [ProdutoID]),
+
+)
+GO
