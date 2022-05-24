@@ -4,38 +4,36 @@ using ShopBrServices;
 namespace ShopBr.Model
 {
     //ANCHOR tornar a classe estatica
-    public  class ManipulaCorreio
+    public  class ManipulaCorreio : Conexao
     {
         public SqlCommand Cmd { get; set; }
-        public Conexao Conect { get; set; }
         public ManipulaCorreio()
         {
             Cmd = new SqlCommand();
-            Conect = new Conexao();  
         }
         public void adcionar(Correio correio){
             Cmd.CommandText = "insert into Correio ( Prazo, CustoFrete) values (@Prazo, @CustoFrete)";
             Cmd.Parameters.AddWithValue("@Prazo",correio.Prazo);
             Cmd.Parameters.AddWithValue("@CustoFrete",correio.Custo);
-            Cmd.Connection = Conect.conectar();
+            Cmd.Connection = conectar();
             Cmd.ExecuteNonQuery();
-            Conect.desconectar();
+            desconectar();
         }
 
         public void remove(Guid id)
         {
             Cmd.CommandText = "DELETE FROM Correio WHERE Id = @Id";
             Cmd.Parameters.AddWithValue("@id",id);
-            Cmd.Connection = Conect.conectar();
+            Cmd.Connection = conectar();
             Cmd.ExecuteNonQuery();
-            Conect.desconectar();
+            desconectar();
         }
 
         public Correio getById(Guid id)
         {
             Cmd.CommandText = "SELECT Id, Prazo, CustoFrete FROM Correio WHERE Id = @Id";
             Cmd.Parameters.AddWithValue("@id",id);  
-            Cmd.Connection = Conect.conectar();
+            Cmd.Connection = conectar();
 
             Correio correio;
             using(SqlDataReader reader = Cmd.ExecuteReader())
@@ -43,12 +41,12 @@ namespace ShopBr.Model
                 if(reader.Read()){
                     if((Guid)reader["Id"]== id){
                         correio = new Correio((Guid)reader["Id"],(byte)reader["Prazo"],(double)reader["CustoFrete"]);
-                        Conect.desconectar();
+                        desconectar();
                         return correio;
                     }
                 }
             }
-            Conect.desconectar();
+            desconectar();
             throw new Exception("Não foi possivel encontrar este correio");
         }
 
@@ -56,7 +54,7 @@ namespace ShopBr.Model
         {
             var correios= new List<Correio>();
             Cmd.CommandText = "SELECT Id, Prazo, CustoFrete FROM Correio ";
-            Cmd.Connection = Conect.conectar();
+            Cmd.Connection = conectar();
 
             using(SqlDataReader reader = Cmd.ExecuteReader())
             {
@@ -64,7 +62,7 @@ namespace ShopBr.Model
                         correios.Add(new Correio((Guid)reader["Id"],(byte)reader["Prazo"],(double)reader["CustoFrete"]));
                 }
                 }
-            Conect.desconectar();
+            desconectar();
             return correios;
         }
     }
