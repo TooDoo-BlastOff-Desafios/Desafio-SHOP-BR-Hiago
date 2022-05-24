@@ -24,7 +24,7 @@ namespace ShopBrServices{
         {
             if(con.State == System.Data.ConnectionState.Open)
             {
-                con.Open();
+                con.Close();
             }
             return con;
         }

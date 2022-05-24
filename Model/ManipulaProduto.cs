@@ -3,15 +3,16 @@ using ShopBrServices;
 
 namespace ShopBr.Model
 {
-    public class ManipulaProduto
+    //ANCHOR tornar a classe estatica
+    public class ManipulaCorreio
     {
         SqlCommand cmd = new SqlCommand();
         Conexao con = new Conexao();
         public string mensagem = "";
-        public ManipulaProduto(Produto prod){
+        public ManipulaCorreio(Correio correio){
             cmd.CommandText = "insert into Correio ( Prazo, CustoFrete) values (@Prazo, @CustoFrete)";
-            cmd.Parameters.AddWithValue("@Prazo",prod.Prazo);
-            cmd.Parameters.AddWithValue("@CustoFrete",prod.Custo);
+            cmd.Parameters.AddWithValue("@Prazo",correio.Prazo);
+            cmd.Parameters.AddWithValue("@CustoFrete",correio.Custo);
 
 
             try
