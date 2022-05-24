@@ -71,14 +71,13 @@ GO
 
 CREATE TABLE [Compra]
 (
-    [Id] UNIQUEIDENTIFIER NOT NULL,
     [ProdutoId] UNIQUEIDENTIFIER NOT NULL,
     [ClienteId] NVARCHAR(14) NOT NULL,
     [CorreioId] UNIQUEIDENTIFIER not NULL,
     [Valor] FLOAT NOT NULL,
     [Quantidade] INT NOT NULL,
 
-    CONSTRAINT [PK_Compras] PRIMARY KEY ([Id]),
+    CONSTRAINT [PK_Compras] PRIMARY KEY ([ProdutoId],[ClienteId]),
     CONSTRAINT [FK_Produto] FOREIGN KEY ([ProdutoId]) REFERENCES Produto ([Id]),
     CONSTRAINT [FK_Cliente] FOREIGN KEY ([ClienteId]) REFERENCES Cliente ([CPF]),
     CONSTRAINT [FK_Correio] FOREIGN KEY ([CorreioId]) REFERENCES Correio ([Id])
