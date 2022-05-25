@@ -15,7 +15,6 @@ CREATE TABLE [Produto]
 )
 GO
 
-
 CREATE TABLE [Loja]
 (
     [Id] UNIQUEIDENTIFIER NOT NULL,
@@ -23,6 +22,7 @@ CREATE TABLE [Loja]
     [Endereco] NVARCHAR(120) NOT NULL,
     [Telefone] NVARCHAR(13) NOT NULL,
     [Email] NVARCHAR(120)
+    CONSTRAINT [Pk_Loja] PRIMARY KEY([Id])
 
 )
 GO 
@@ -78,7 +78,7 @@ CREATE TABLE [Compra]
     [Quantidade] INT NOT NULL,
 
     CONSTRAINT [PK_Compras] PRIMARY KEY ([ProdutoId],[ClienteId]),
-    CONSTRAINT [FK_Produto] FOREIGN KEY ([ProdutoId]) REFERENCES Produto ([Id]),
+    CONSTRAINT [FK_ProdutoC] FOREIGN KEY ([ProdutoId]) REFERENCES Produto ([Id]),
     CONSTRAINT [FK_Cliente] FOREIGN KEY ([ClienteId]) REFERENCES Cliente ([CPF]),
     CONSTRAINT [FK_Correio] FOREIGN KEY ([CorreioId]) REFERENCES Correio ([Id])
 
@@ -89,14 +89,14 @@ GO
 
 CREATE  TABLE [Avaliacao]
 (
-    [ClienteId] UNIQUEIDENTIFIER NOT NULL,
+    [ClienteId] NVARCHAR(14)  NOT NULL,
     [ProdutoID] UNIQUEIDENTIFIER NOT NULL,
     [Avaliacao] TINYINT NOT NULL CHECK([Avaliacao] IN(1,2,3, 4, 5)),
     [Comentario] NVARCHAR(320) NOT NULL ,
 
     CONSTRAINT [PK_Avaliacao] PRIMARY KEY ([ClienteId], [ProdutoID]),
-    CONSTRAINT [FK_Produto] FOREIGN KEY ([ProdutoId]) REFERENCES Produto ([Id]),
-    CONSTRAINT [FK_Cliente] FOREIGN KEY ([ClienteId]) REFERENCES Cliente ([CPF]),
+    CONSTRAINT [FK_Produtos] FOREIGN KEY ([ProdutoId]) REFERENCES Produto ([Id]),
+    CONSTRAINT [FK_Clientes] FOREIGN KEY ([ClienteId]) REFERENCES Cliente ([CPF]),
 
 
 )
