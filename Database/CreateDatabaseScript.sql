@@ -3,7 +3,6 @@ USE master
 CREATE DATABASE  [SHOPBR]
 
 USE [SHOPBR]
-
 CREATE TABLE [Produto]
 (
     [Id] UNIQUEIDENTIFIER NOT NULL,
@@ -41,6 +40,7 @@ CREATE TABLE [ProdutoEmLoja]
 )
 GO 
 
+
 CREATE TABLE [Cliente]
 (
     [CPF] NVARCHAR(14)  NOT NULL,
@@ -77,6 +77,7 @@ CREATE TABLE [Compra]
     [CorreioId] UNIQUEIDENTIFIER not NULL,
     [Valor] FLOAT NOT NULL,
     [Quantidade] INT NOT NULL,
+    [TipoPagamento] NVARCHAR(80) NOT NULL,
 
     CONSTRAINT [PK_Compras] PRIMARY KEY ([ProdutoId],[ClienteId]),
     CONSTRAINT [FK_ProdutoC] FOREIGN KEY ([ProdutoId]) REFERENCES Produto ([Id]),

@@ -5,9 +5,9 @@ using ShopBr.Model;
 namespace ShopBr.Controller
 {
     //ANCHOR tornar a classe estatica
-    public  class ManipulaCorreio : Conexao
+    public  class CCorreio : Conexao
     {
-        public ManipulaCorreio()
+        public CCorreio()
         {
         }
         public void adcionar(Correio correio){
