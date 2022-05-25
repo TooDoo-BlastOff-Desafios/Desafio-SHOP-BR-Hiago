@@ -11,6 +11,7 @@ CREATE TABLE [Produto]
     [Marca] NVARCHAR(50) NOT null,
     [Tipo] NVARCHAR(50) NOT null,
     [Preco] DECIMAL NOT NULL,
+    [Quantidade] INT NOT NULL,
     CONSTRAINT [PK_Produto] PRIMARY KEY([Id])
 )
 GO

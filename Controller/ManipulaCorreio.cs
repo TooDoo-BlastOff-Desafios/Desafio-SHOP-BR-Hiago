@@ -1,15 +1,14 @@
 using System.Data.SqlClient;
 using ShopBrServices;
+using ShopBr.Model;
 
-namespace ShopBr.Model
+namespace ShopBr.Controller
 {
     //ANCHOR tornar a classe estatica
     public  class ManipulaCorreio : Conexao
     {
-        public SqlCommand Cmd { get; set; }
         public ManipulaCorreio()
         {
-            Cmd = new SqlCommand();
         }
         public void adcionar(Correio correio){
             Cmd.CommandText = "insert into Correio ( Prazo, CustoFrete) values (@Prazo, @CustoFrete)";
@@ -61,7 +60,7 @@ namespace ShopBr.Model
                 while(reader.Read()){
                         correios.Add(new Correio((Guid)reader["Id"],(byte)reader["Prazo"],(double)reader["CustoFrete"]));
                 }
-                }
+            }
             desconectar();
             return correios;
         }
