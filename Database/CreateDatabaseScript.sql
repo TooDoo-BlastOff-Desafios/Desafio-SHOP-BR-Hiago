@@ -32,7 +32,7 @@ CREATE TABLE [ProdutoEmLoja]
 (
     [LojaId] UNIQUEIDENTIFIER NOT NULL,
     [ProdutoId] UNIQUEIDENTIFIER NOT NULL,
-    [Quantidade] INT
+    [Quantidade] INT NOT NULL
 
     CONSTRAINT [PK_ProdutoEmLoja] PRIMARY KEY ([LojaId], [ProdutoId]),
     CONSTRAINT [FK_Produto] FOREIGN KEY ([ProdutoId]) REFERENCES Produto ([Id]),
@@ -93,7 +93,7 @@ CREATE  TABLE [Avaliacao]
     [ClienteId] NVARCHAR(14)  NOT NULL,
     [ProdutoID] UNIQUEIDENTIFIER NOT NULL,
     [Avaliacao] TINYINT NOT NULL CHECK([Avaliacao] IN(1,2,3, 4, 5)),
-    [Comentario] NVARCHAR(320) NOT NULL ,
+    [Comentario] NVARCHAR(320),
 
     CONSTRAINT [PK_Avaliacao] PRIMARY KEY ([ClienteId], [ProdutoID]),
     CONSTRAINT [FK_Produtos] FOREIGN KEY ([ProdutoId]) REFERENCES Produto ([Id]),
