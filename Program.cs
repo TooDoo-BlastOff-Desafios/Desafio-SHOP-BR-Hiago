@@ -8,7 +8,6 @@ namespace sqltest
     {
         static void Main(string[] args)
         {
-            //adm.Menu();
             CCorreio man = new CCorreio();
             Correio correio = new Correio(1,50);
             man.adcionar(correio);
@@ -18,6 +17,7 @@ namespace sqltest
             ClienteView client = new ClienteView();
             client.Menu();
             Administrador adm = new Administrador();
+            adm.Menu();
             foreach(Correio cor in man.get()){
                 Console.WriteLine(cor.Id);
             }

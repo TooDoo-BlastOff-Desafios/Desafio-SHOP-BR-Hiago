@@ -11,6 +11,7 @@ namespace ShopBr.Controller
         }
         public void Adicionar(Avaliacao avaliacao)
         {
+            Cmd.Parameters.Clear();
             Cmd.CommandText = "insert into Avaliacao ( ClienteId, ProdutoId, Avaliacao, Comentario) values (@ClienteId, @ProdutoID, @Avaliacao, @Comentario)";
             Cmd.Parameters.AddWithValue("@ClienteId", avaliacao.ClienteId);
             Cmd.Parameters.AddWithValue("@ProdutoId",avaliacao.ProdutoId);
@@ -22,6 +23,7 @@ namespace ShopBr.Controller
         }
         public void RemoveById(string id)
         {
+            Cmd.Parameters.Clear();
             Cmd.CommandText = "DELETE FROM Avaliacao WHERE ClienteId = @Id";
             Cmd.Parameters.AddWithValue("@id",id);
             Cmd.Connection = conectar();
@@ -30,6 +32,7 @@ namespace ShopBr.Controller
         }
         public void RemoveByIds(string clienteid, Guid produtoid)
         {
+            Cmd.Parameters.Clear();
             Cmd.CommandText = "DELETE FROM Avaliacao WHERE ClientId = @Id AND ProdutoId = @Produto";
             Cmd.Parameters.AddWithValue("@id",clienteid);
             Cmd.Parameters.AddWithValue("@Produto",produtoid);
@@ -40,6 +43,7 @@ namespace ShopBr.Controller
         
         public Avaliacao GetById(Guid id)
         {
+            Cmd.Parameters.Clear();
             Cmd.CommandText = "SELECT ClienteId, ProdutoId, Avaliacao, Comentario FROM Avaliacao WHERE Id = @Id";
             Cmd.Parameters.AddWithValue("@id",id);  
             Cmd.Connection = conectar();
@@ -60,6 +64,7 @@ namespace ShopBr.Controller
         }
         public List<Avaliacao> Get()
         {
+            Cmd.Parameters.Clear();
             var avaliacoes= new List<Avaliacao>();
             Cmd.CommandText = "SELECT ClienteId, ProdutoId, Avaliacao, Comentario FROM Avaliacao ";
             Cmd.Connection = conectar();

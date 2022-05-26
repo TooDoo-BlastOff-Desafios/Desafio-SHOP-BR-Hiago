@@ -12,8 +12,9 @@ namespace ShopBr.Controller
             
         }
         public void adcionar(Produto produto){
-            Cmd.CommandText = "insert into Correio ( Id, Nome, Marca, Tipo, Preco, Quantidade) values ( @Id, @Nome, @Marca, @Tipo, @Preco, @Quantidade)";
-            Cmd.Parameters.AddWithValue("@Id",produto.Id);
+            Cmd.Parameters.Clear();
+            Cmd.CommandText = "insert into Produto ( Id, Nome, Marca, Tipo, Preco, Quantidade) values (@IdProd, @Nome, @Marca, @Tipo, @Preco, @Quantidade)";
+            Cmd.Parameters.AddWithValue("@IdProd",produto.Id);
             Cmd.Parameters.AddWithValue("@Nome",produto.Nome);
             Cmd.Parameters.AddWithValue("@Marca",produto.Marca);
             Cmd.Parameters.AddWithValue("@Tipo",produto.Tipo);

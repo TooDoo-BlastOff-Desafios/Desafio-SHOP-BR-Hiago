@@ -5,7 +5,7 @@ namespace ShopBr.Model
         //ANCHOR fazer sobrecarga de construtor para receber o id em consultas ao banco
         public Produto()
         {
-            Id = new Guid();
+            Id = Guid.NewGuid();
             Nome = "";
             Marca = "";
             Tipo = "";
@@ -13,7 +13,7 @@ namespace ShopBr.Model
         }
         public Produto(string nome, string marca, string tipo, decimal preco, int quantidade)
         {
-            Id = new Guid();
+            Id = Guid.NewGuid();
             Nome = nome;
             Marca = marca;
             Tipo = tipo;

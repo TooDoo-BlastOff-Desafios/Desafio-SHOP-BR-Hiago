@@ -46,6 +46,8 @@ namespace ShopBr.View
                     administraAvaliacao.Menu();
                     break;
                 case 6:
+                    var admProdutos = new AdministradorProdutos();
+                    admProdutos.Menu();
                     break;
             }
             if(option != 7)
