@@ -26,8 +26,16 @@ namespace ShopBr.Controller
 
         public bool Validar(string cpf, string senha)
         {
-            return true;
-            //ANCHOR fazer função de validacao
+            Cmd.CommandText = "Select CPF FROM Cliente WHERE CPF = @CPF AND Senha = @Senha";
+            Cmd.Parameters.AddWithValue("@CPF", cpf);
+            Cmd.Parameters.AddWithValue("@Senha", senha);
+            Cmd.Connection = conectar();
+            using (SqlDataReader reader = Cmd.ExecuteReader())
+            {
+                if(reader.Read())
+                    return true;
+            }
+            return false;
         }
     }
 }

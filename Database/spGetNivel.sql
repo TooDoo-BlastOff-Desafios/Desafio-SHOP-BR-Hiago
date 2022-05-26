@@ -1,17 +1,22 @@
 CREATE OR ALTER PROCEDURE [spGetNivel]
-    @Quantidade INT
+    @Quantidade INT,
+    @Nivel NVARCHAR(22) OUTPUT
 AS
-    IF @Quantidade >=0 AND @Quantidade <=10
+    IF @Quantidade >=0 AND @Quantidade <=10 
     BEGIN
-        SELECT 'Nivel 1' AS retorno
+        SELECT @Nivel = 'Nivel 1' 
     END
-    ELSE  IF  @Quantidade <=20
+    ELSE  IF @Quantidade >10 AND @Quantidade <=20
     BEGIN
-        SELECT 'Nivel 2' AS retorno
+        SELECT @Nivel = 'Nivel 2' 
     END
     ELSE  IF @Quantidade >20
     BEGIN
-        SELECT 'Nivel 3' AS retorno
+        SELECT @Nivel = 'Nivel 3' 
     END
     ELSE
-        SELECT 'Nivel inválido' AS retorno
+        SELECT @Nivel = 'Nivel invalido'
+    
+    RETURN 
+
+

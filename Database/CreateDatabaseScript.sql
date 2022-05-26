@@ -50,7 +50,7 @@ CREATE TABLE [Cliente]
     [CEP] NVARCHAR(9) NOT NULL,
     [Email] NVARCHAR(120) NOT NULL ,
     [Senha] NVARCHAR(24) NOT NULL,
-    [Nivel] TINYINT NOT NULL CHECK([Nivel] IN(1,2,3))
+    [Nivel] NVARCHAR(22) NOT NULL CHECK([Nivel] IN('Nivel 1','Nivel 2','Nivel 3'))
 
     CONSTRAINT [PK_CLiente] PRIMARY KEY ([Cpf]),
 
