@@ -2,7 +2,7 @@ namespace ShopBr.Model
 {
     public class Avaliacao
     {
-        public Avaliacao(Guid clienteId, Guid produtoId, byte nota, string comentario)
+        public Avaliacao(string clienteId, Guid produtoId, byte nota, string comentario)
         {
             ClienteId = clienteId;
             ProdutoId = produtoId;
@@ -10,7 +10,7 @@ namespace ShopBr.Model
             Nota = nota;
         }
 
-        public Guid ClienteId { get; set; }
+        public string ClienteId { get; set; }
         public string  Comentario { get; set; }
         public Guid ProdutoId { get; set; }
         public byte Nota  { get; set; }

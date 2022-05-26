@@ -70,6 +70,20 @@ namespace ShopBr.View
             Console.WriteLine("1- Para fazer uma compra");
             Console.WriteLine("2- Para avaliar uma Compra");
             Console.WriteLine("3- Verificar compras");
+            Console.WriteLine("4- Voltar ao Menu");
+            byte  option = Solicitor.GetByteInterval(1,4);
+            switch(option)
+            {
+                case 1:
+                    //ANCHOR criar função de realizar compra;
+                    //ANCHOR fazer menu fora da classe que receba o cpf do cliente
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+            }
+
         }
     }
 }

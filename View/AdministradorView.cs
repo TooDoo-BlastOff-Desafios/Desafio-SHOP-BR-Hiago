@@ -4,7 +4,7 @@ namespace ShopBr.View
 {
     public class Administrador
     {
-        Administrador(){
+        public Administrador(){
 
         }
         public void Menu(){
@@ -13,7 +13,7 @@ namespace ShopBr.View
             string senha = Solicitor.GetValidString(); //ANCHOR pudar para função de pegar senha
             if(senha == "Ra-23140304")
             {
-                MenuCadastro();
+                MenuAdministrador();
             }else{
                 Console.WriteLine("Senha invalida");
                 Console.WriteLine("Pressione qualquer tecla para proseguir");
@@ -42,6 +42,8 @@ namespace ShopBr.View
                 case 4:
                     break;
                 case 5:
+                    var administraAvaliacao = new AdministraAvaliacao();
+                    administraAvaliacao.Menu();
                     break;
                 case 6:
                     break;

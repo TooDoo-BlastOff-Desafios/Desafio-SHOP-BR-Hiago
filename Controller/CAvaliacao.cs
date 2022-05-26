@@ -9,7 +9,7 @@ namespace ShopBr.Controller
         {
             
         }
-        public void adicionar(Avaliacao avaliacao)
+        public void Adicionar(Avaliacao avaliacao)
         {
             Cmd.CommandText = "insert into Avaliacao ( ClienteId, ProdutoId, Avaliacao, Comentario) values (@ClienteId, @ProdutoID, @Avaliacao, @Comentario)";
             Cmd.Parameters.AddWithValue("@ClienteId", avaliacao.ClienteId);
@@ -20,16 +20,25 @@ namespace ShopBr.Controller
             Cmd.ExecuteNonQuery();
             desconectar();
         }
-        public void remove(Guid id)
+        public void RemoveById(string id)
         {
-            Cmd.CommandText = "DELETE FROM Avaliacao WHERE Id = @Id";
+            Cmd.CommandText = "DELETE FROM Avaliacao WHERE ClienteId = @Id";
             Cmd.Parameters.AddWithValue("@id",id);
             Cmd.Connection = conectar();
             Cmd.ExecuteNonQuery();
             desconectar();
         }
+        public void RemoveByIds(string clienteid, Guid produtoid)
+        {
+            Cmd.CommandText = "DELETE FROM Avaliacao WHERE ClientId = @Id AND ProdutoId = @Produto";
+            Cmd.Parameters.AddWithValue("@id",clienteid);
+            Cmd.Parameters.AddWithValue("@Produto",produtoid);
+            Cmd.Connection = conectar();
+            Cmd.ExecuteNonQuery();
+            desconectar();
+        }
         
-        public Avaliacao getById(Guid id)
+        public Avaliacao GetById(Guid id)
         {
             Cmd.CommandText = "SELECT ClienteId, ProdutoId, Avaliacao, Comentario FROM Avaliacao WHERE Id = @Id";
             Cmd.Parameters.AddWithValue("@id",id);  
@@ -40,7 +49,7 @@ namespace ShopBr.Controller
             {
                 if(reader.Read()){
                     if((Guid)reader["Id"]== id){
-                        avaliacao = new Avaliacao((Guid)reader["ClienteId"],(Guid)reader["ProdutoId"], (byte)reader["Avaliacao"],(String)reader["Comentario"]);
+                        avaliacao = new Avaliacao((string)reader["ClienteId"],(Guid)reader["ProdutoId"], (byte)reader["Avaliacao"],(String)reader["Comentario"]);
                         desconectar();
                         return avaliacao;
                     }
@@ -49,7 +58,7 @@ namespace ShopBr.Controller
             desconectar();
             throw new Exception("Não foi possivel encontrar este correio");
         }
-        public List<Avaliacao> get()
+        public List<Avaliacao> Get()
         {
             var avaliacoes= new List<Avaliacao>();
             Cmd.CommandText = "SELECT ClienteId, ProdutoId, Avaliacao, Comentario FROM Avaliacao ";
@@ -58,12 +67,13 @@ namespace ShopBr.Controller
             using(SqlDataReader reader = Cmd.ExecuteReader())
             {
                 while(reader.Read()){
-                        avaliacoes.Add(new Avaliacao((Guid)reader["ClienteId"],(Guid)reader["ProdutoId"],(byte)reader["Avaliacao"],(String)reader["Comentario"]));
+                        avaliacoes.Add(new Avaliacao((string)reader["ClienteId"],(Guid)reader["ProdutoId"],(byte)reader["Avaliacao"],(String)reader["Comentario"]));
                 }
             }
             desconectar();
             return avaliacoes ;
         }
+
     }
 
 }
