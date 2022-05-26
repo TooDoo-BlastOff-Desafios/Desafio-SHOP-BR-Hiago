@@ -3,6 +3,14 @@ namespace ShopBr.Model
     public class Produto
     {
         //ANCHOR fazer sobrecarga de construtor para receber o id em consultas ao banco
+        public Produto()
+        {
+            Id = new Guid();
+            Nome = "";
+            Marca = "";
+            Tipo = "";
+
+        }
         public Produto(string nome, string marca, string tipo, decimal preco, int quantidade)
         {
             Id = new Guid();

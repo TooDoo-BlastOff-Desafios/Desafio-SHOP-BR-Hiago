@@ -25,7 +25,7 @@ namespace ShopBr.View
             byte option = Solicitor.GetByteInterval(1,3);
             switch(option){
                 case 1:
-                    //ANCHOR Adicionar função de consulta de cliente
+                    ConsultaCLiente();
                     break;
                 case 2:
                     CadastrarCLiente();
@@ -59,11 +59,25 @@ namespace ShopBr.View
             Console.WriteLine("1 Letra Maiúscula no mínimo");
             Console.WriteLine("1 Número no mínimo");
             Console.WriteLine("1 Símbolo no mínimo: $*&@#");
-            cliente.Senha = Solicitor.GetValidString();
+            cliente.Senha = Solicitor.GetValidString();//ANCHOR fazer função get senha
             manipulator.Adicionar(cliente);
             MenuCliente();
         }
-        public void MenuCliente()
+
+        private void  ConsultaCLiente()
+        {
+            Console.WriteLine("Para fazer o login fazor insira seu CPF");
+            Console.WriteLine("Siga o formato: 000.000.000-00");
+            cliente.Cpf = Solicitor.GetValidCPF();
+            Console.WriteLine("Favor insira sua senha");
+            cliente.Senha = Solicitor.GetValidString();//ANCHOR fazer função get senha
+            if(manipulator.Validar(cliente.Cpf, cliente.Senha)){
+                MenuCliente();
+            }
+
+
+        }
+        private void MenuCliente()
         {
             Console.Clear();
             Console.WriteLine($"Bem Vindo {cliente.Nome}");

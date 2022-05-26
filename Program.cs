@@ -8,8 +8,7 @@ namespace sqltest
     {
         static void Main(string[] args)
         {
-            Administrador adm = new Administrador();
-            adm.Menu();
+            //adm.Menu();
             CCorreio man = new CCorreio();
             Correio correio = new Correio(1,50);
             man.adcionar(correio);
@@ -17,7 +16,8 @@ namespace sqltest
             //Console.WriteLine(correio.Custo);
 
             ClienteView client = new ClienteView();
-            //client.Menu();
+            client.Menu();
+            Administrador adm = new Administrador();
             foreach(Correio cor in man.get()){
                 Console.WriteLine(cor.Id);
             }
