@@ -16,6 +16,7 @@ namespace ShopBr.Model
             CodigoRastreio = codigoRastreio;
             Valor = valor;
         }
+        
         public override string ToString()
         {
             return $"Cpf do cliente: {Cpf} Valor: {Valor} Quantidade: {Quantidade} ";

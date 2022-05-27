@@ -141,19 +141,24 @@ namespace ShopBr.View
         }
         private void RealizarCompra(Produto produto)
         {
-            Compra compra = new Compra();
-            compra.Cpf = Cpf;
-            compra.IdProduto = produto.Id;
-            compra.CodigoRastreio = GetCorreio();
-            compra.Quantidade = GetQuantidade(produto.Quantidade); 
-            compra.Valor= compra.Quantidade * produto.Preco;
-            CCompra controlaCompra = new CCompra();
-            Console.WriteLine(controlaCompra.Adicionar(compra));
+            if(produto.Quantidade > 0){
+                Compra compra = new Compra();
+                compra.Cpf = Cpf;
+                compra.IdProduto = produto.Id;
+                compra.CodigoRastreio = GetCorreio();
+                compra.Quantidade = GetQuantidade(produto.Quantidade); 
+                compra.Valor= compra.Quantidade * produto.Preco;
+                CCompra controlaCompra = new CCompra();
+                Console.WriteLine(controlaCompra.Adicionar(compra));
+            }else
+            {
+                Console.WriteLine("Produto sem estoque disponivel");    
+            }
             Solicitor.Parada();
         }
         private int GetQuantidade(int max)
         {
-            Console.WriteLine("Insira quantos prodcutos deseja comprar");
+            Console.WriteLine("Insira quantos produtos deseja comprar");
             Console.WriteLine("Voce pode comprar no maximo "+ max);
             return Solicitor.GetIntInterval(0,max);
         }

@@ -73,7 +73,7 @@ CREATE TABLE [Compra]
     [ProdutoId] UNIQUEIDENTIFIER NOT NULL,
     [ClienteId] NVARCHAR(14) NOT NULL,
     [CorreioId] UNIQUEIDENTIFIER not NULL,
-    [Valor] FLOAT NOT NULL,
+    [Valor] DECIMAL NOT NULL,
     [Quantidade] INT NOT NULL,
     [TipoPagamento] NVARCHAR(80) NOT NULL,
 

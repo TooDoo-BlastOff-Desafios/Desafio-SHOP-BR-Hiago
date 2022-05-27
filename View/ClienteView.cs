@@ -77,10 +77,9 @@ namespace ShopBr.View
             Console.Clear();
             Console.WriteLine($"Bem Vindo {cliente.Nome}");
             Console.WriteLine("1- Para fazer uma compra");
-            Console.WriteLine("2- Para avaliar uma Compra");
             Console.WriteLine("3- Verificar compras");
             Console.WriteLine("4- Voltar ao Menu");
-            byte  option = Solicitor.GetByteInterval(1,4);
+            byte  option = Solicitor.GetByteInterval(1,3);
             switch(option)
             {
                 case 1:
@@ -88,11 +87,12 @@ namespace ShopBr.View
                     compra.MenuCompra();
                     break;
                 case 2:
-                    break;
-                case 3:
+                    var verCompras = new ClienteComprasRealizadas(cliente.Cpf);
+                    verCompras.Menu();
                     break;
             }
-
+            if(option !=3)
+                MenuCliente();
         }
     }
 }

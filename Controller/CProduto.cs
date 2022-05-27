@@ -72,7 +72,7 @@ namespace ShopBr.Controller
         {
             Cmd.Parameters.Clear();
             var produtos= new List<Produto>();
-            Cmd.CommandText = "SELECT [Produto].Id, [Produto].Nome, [Produto].Marca, [Produto].Tipo, [Produto].Preco, [Produto].Quantidade FROM Produto LEFT JOIN [ProdutoEmLoja] ON Produto.Id != [ProdutoEmLoja].ProdutoId WHERE [ProdutoEmLoja].LojaId = @LojaId OR [ProdutoEmLoja].LojaId is Null";
+            Cmd.CommandText = "SELECT [Produto].Id, [Produto].Nome, [Produto].Marca, [Produto].Tipo, [Produto].Preco, [Produto].Quantidade FROM Produto  LEFT JOIN [ProdutoEmLoja] ON Produto.Id != [ProdutoEmLoja].ProdutoId WHERE [ProdutoEmLoja].LojaId = @LojaI5d OR [ProdutoEmLoja].LojaId is Null";
             Cmd.Parameters.AddWithValue("@LojaId",lojaId);  
             Cmd.Connection = conectar();
 

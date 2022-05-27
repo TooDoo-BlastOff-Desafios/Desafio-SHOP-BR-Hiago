@@ -33,6 +33,11 @@ namespace ShopBr.View
                     Gerenciador.RemoveByIds(compras[remover].Cpf, compras[remover].IdProduto);
                 }   
             }
+            else
+            {
+                Console.WriteLine("Nenhuma Compra foi realizada");
+                Solicitor.Parada();
+            }
         }
     }
 }

@@ -17,7 +17,7 @@ namespace ShopBr.View
             List<Avaliacao> avaliacoes = Gerenciador.Get();
             foreach(Avaliacao avaliacao in avaliacoes)
             {
-                Console.Write($"{contador} {avaliacao.ProdutoId} {avaliacao.Comentario}");
+                Console.Write($"{contador} {avaliacao.ProdutoId} {avaliacao.Comentario} Nota:");
                 PrintNota(avaliacao.Nota);
                 contador+=1;
             }

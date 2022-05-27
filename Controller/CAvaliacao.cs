@@ -78,6 +78,22 @@ namespace ShopBr.Controller
             desconectar();
             return avaliacoes ;
         }
+        public List<Produto> ProdutosComprados(string cpf)
+        {
+            Cmd.Parameters.Clear();
+            Cmd.CommandText = "SELECT [Produto].Id, [Produto].Marca, [Produto].Nome, [Produto].Preco, [Produto].Quantidade, [Produto].Tipo FROM Produto  JOIN Compra  ON [Produto].Id = Compra.ProdutoId WHERE Compra.ClienteId = @Cpf";
+            Cmd.Parameters.AddWithValue("@Cpf",cpf);
+            Cmd.Connection = conectar();
+            var produtos = new List<Produto>();
+            using(SqlDataReader reader = Cmd.ExecuteReader())
+            {
+                while(reader.Read()){
+                        produtos.Add(new Produto((Guid)reader["Id"],(string)reader["Nome"],(string)reader["Marca"],(string)reader["Tipo"],(decimal)reader["Preco"],(int)reader["Quantidade"]));
+                }
+            }
+            desconectar();
+            return produtos;
+        }
 
     }
 
