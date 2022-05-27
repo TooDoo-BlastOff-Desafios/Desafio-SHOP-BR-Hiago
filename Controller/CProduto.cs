@@ -24,10 +24,27 @@ namespace ShopBr.Controller
             Cmd.ExecuteNonQuery();
             desconectar();
         }
-        public void remove(Guid id)
+        public void Remove(Guid id)
         {
-            //ANCHOR IMPLEMTENTAR FUNÇÃO PARA ISSO NO BANCO
-           
+            Cmd.Parameters.Clear();
+            Cmd.CommandText = "DELETE FROM Avaliacao WHERE ProdutoId = @Id";
+            Cmd.Parameters.AddWithValue("@id",id);
+            Cmd.Connection = conectar();
+            Cmd.ExecuteNonQuery();
+            desconectar();
+            Cmd.Parameters.Clear();
+            Cmd.CommandText = "DELETE FROM Compra WHERE ProdutoId = @Id";
+            Cmd.Parameters.AddWithValue("@id",id);
+            Cmd.Connection = conectar();
+            Cmd.ExecuteNonQuery();
+            desconectar();
+            Cmd.Parameters.Clear();           
+            Cmd.CommandText = "DELETE FROM Produto WHERE Id = @Id";
+            Cmd.Parameters.AddWithValue("@id",id);
+            Cmd.Connection = conectar();
+            Cmd.ExecuteNonQuery();
+            desconectar();
+
         }
         public Produto getById(Guid id)
         {
@@ -119,6 +136,19 @@ namespace ShopBr.Controller
             Cmd.CommandText = "insert into ProdutoEmLoja ( LojaId, ProdutoId) values (@IdLoja, @IdProd)";
             Cmd.Parameters.AddWithValue("@IdLoja",lojaId);
             Cmd.Parameters.AddWithValue("@IdProd", produtoId);
+            Cmd.Connection = conectar();
+            Cmd.ExecuteNonQuery();
+            desconectar();
+        }
+        public void Update(Produto produto){
+            Cmd.Parameters.Clear();
+            Cmd.CommandText = "UPDATE Produto SET Nome = @Nome, Marca = @Marca, Tipo= @Tipo, Preco = @Preco, Quantidade = @Quantidade WHERE Produto.Id = @IdProd";
+            Cmd.Parameters.AddWithValue("@IdProd",produto.Id);
+            Cmd.Parameters.AddWithValue("@Nome",produto.Nome);
+            Cmd.Parameters.AddWithValue("@Marca",produto.Marca);
+            Cmd.Parameters.AddWithValue("@Tipo",produto.Tipo);
+            Cmd.Parameters.AddWithValue("@Preco",produto.Preco);
+            Cmd.Parameters.AddWithValue("@Quantidade",produto.Quantidade);
             Cmd.Connection = conectar();
             Cmd.ExecuteNonQuery();
             desconectar();
