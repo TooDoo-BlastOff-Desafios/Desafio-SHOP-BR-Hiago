@@ -50,7 +50,7 @@ namespace ShopBr.Controller
             using(SqlDataReader reader = Cmd.ExecuteReader())
             {
                 while(reader.Read()){
-                        compras.Add(new Compra((string)reader["ClienteId"], (Guid)reader["ProdutoId"], (int)reader["Quantidade"], (string)reader["TipoPagamento"], (Guid)reader["CorreioId"], (double)reader["valor"]));
+                        compras.Add(new Compra((string)reader["ClienteId"], (Guid)reader["ProdutoId"], (int)reader["Quantidade"], (string)reader["TipoPagamento"], (Guid)reader["CorreioId"], (decimal)reader["valor"]));
                 }
             }
             desconectar();

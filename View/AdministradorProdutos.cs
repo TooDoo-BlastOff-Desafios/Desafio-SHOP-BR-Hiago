@@ -43,7 +43,7 @@ namespace ShopBr.View
             Console.WriteLine("Insira o tipo do seu produto");
             produto.Tipo = Solicitor.GetValidString();
             Console.WriteLine("Insira o preço do seu produto");
-            produto.Preco = Solicitor.GetValidpositiveDouble();
+            produto.Preco = (decimal) Solicitor.GetValidpositiveDouble();
             Console.WriteLine("Insira a quantidade de produtos");
             produto.Quantidade = Solicitor.GetValidpositiveInt();
             Gerenciador.adcionar(produto);

@@ -20,8 +20,8 @@ namespace ShopBr.View
         public void MenuCompra()
         {
             Console.Clear();
-            Console.WriteLine("Menu de compras");
-            List<Produto> produtos = GerenciaProdutos.get();
+            Console.WriteLine("Todos os Produtos");
+            List<Produto> produtos = GerenciaProdutos.Get();
             int contador = 0;
             foreach(Produto produto in  produtos)
             {
@@ -32,8 +32,9 @@ namespace ShopBr.View
                 Console.WriteLine("1- Para adicionar um produto ao Carrinho");
                 Console.WriteLine("2- Para comprar um produto");
                 Console.WriteLine("3- Para ver o carrinho de compras");
-                Console.WriteLine("4- Para sair");
-                var option = Solicitor.GetByteInterval(1,4);
+                Console.WriteLine("4- Para comprar por uma loja");
+                Console.WriteLine("5- Para sair");
+                var option = Solicitor.GetByteInterval(1,5);
                 switch(option)
                 {
                     case 1:
@@ -49,8 +50,16 @@ namespace ShopBr.View
                     case 3:
                         MenuCarrinho();
                         break;
+                    case 4:
+                        try{
+                            ComprarPorLoja(SelectLoja());
+                        }catch(Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
+                        break;
                 }
-                if(option != 4)
+                if(option != 5)
                     MenuCompra();
             }else{
                 Console.Clear();
@@ -59,6 +68,52 @@ namespace ShopBr.View
                 MenuCompra();
             }
 
+        }
+        public void ComprarPorLoja(Loja loja)
+        {
+            Console.Clear();
+            Console.WriteLine("Compar pela loja ", loja.Nome);
+            CProduto manipulaProduto = new CProduto();
+            List<Produto> produtos = manipulaProduto.GetNaLoja(loja.Id);
+            int contador = 0;
+            foreach(Produto produto in  produtos)
+            {
+                Console.WriteLine($"{contador}: {produto}");
+                contador+=1;
+            }
+            if(contador!=0){
+                Console.WriteLine("Insira o numero do produto que quer comprar:");
+                int numeroProduto = Solicitor.GetIntInterval(0, contador-1);
+                RealizarCompra(produtos[numeroProduto]);
+                Console.WriteLine("Compra realizada");
+            }else{
+                Console.WriteLine("Impossivel remover um produto dessa loja");
+            }
+            Solicitor.Parada();
+            
+        }
+        public Loja SelectLoja()
+        {
+            Console.Clear();
+            Console.WriteLine("Lojas");
+            var manipulaloja = new  CLoja();
+            var lojas = manipulaloja.Get();
+            int contador = 0;
+            foreach(Loja loja in lojas)
+            {
+                Console.WriteLine($"{contador} {loja}");
+                contador+=1;
+            }
+
+            if(contador!=0){
+                Console.WriteLine("Insira o numero do correio que deseja escolher");
+                int numeroLoja = Solicitor.GetIntInterval(0, contador-1);
+                return lojas[numeroLoja];
+            }
+            else
+            {
+                throw new Exception("Nenhuma loja cadastrada");
+            }
         }
         public void MenuCarrinho()
         {

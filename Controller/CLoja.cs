@@ -10,7 +10,8 @@ namespace ShopBr.Controller
         {
             
         }
-        public void adcionar(Loja loja){
+        public void Adcionar(Loja loja){
+            Cmd.Parameters.Clear();
             Cmd.CommandText = "insert into Loja ( Id, Nome, Endereco, Telefone, Email) values (@Id, @Nome, @Endereco, @Telefone, @Email)";
             Cmd.Parameters.AddWithValue("@id",loja.Id);
             Cmd.Parameters.AddWithValue("@Nome",loja.Nome);
@@ -23,8 +24,15 @@ namespace ShopBr.Controller
             desconectar();
         }
 
-        public void remove(Guid id)
+        public void Remove(Guid id)
         {
+            Cmd.Parameters.Clear();
+            Cmd.CommandText = "DELETE FROM ProdutoEmLoja WHERE LojaId = @Id";
+            Cmd.Parameters.AddWithValue("@id",id);
+            Cmd.Connection = conectar();
+            Cmd.ExecuteNonQuery();
+            desconectar();
+            Cmd.Parameters.Clear();
             Cmd.CommandText = "DELETE FROM Loja WHERE Id = @Id";
             Cmd.Parameters.AddWithValue("@id",id);
             Cmd.Connection = conectar();
@@ -34,6 +42,7 @@ namespace ShopBr.Controller
 
         public Loja getById(Guid id)
         {
+            Cmd.Parameters.Clear();
             Cmd.CommandText = "SELECT Id, Nome, Endereco, Telefone, Email FROM loja WHERE Id = @Id";
             Cmd.Parameters.AddWithValue("@id",id);  
             Cmd.Connection = conectar();
@@ -52,7 +61,7 @@ namespace ShopBr.Controller
             desconectar();
             throw new Exception("Não foi possivel encontrar este loja");
         }
-        public List<Loja> get()
+        public List<Loja> Get()
         {
             var loja= new List<Loja>();
             Cmd.CommandText = "SELECT Id, Nome, Endereco, Telefone, Email FROM loja ";

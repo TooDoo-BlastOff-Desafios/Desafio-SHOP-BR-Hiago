@@ -41,7 +41,7 @@ namespace ShopBr.Controller
             {
                 if(reader.Read()){
                     if((Guid)reader["Id"]== id){
-                        produto = new Produto((Guid)reader["Id"],(string)reader["Nome"],(string)reader["Marca"],(string)reader["Tipo"],(double)reader["Preco"],(int)reader["Quantidade"]);
+                        produto = new Produto((Guid)reader["Id"],(string)reader["Nome"],(string)reader["Marca"],(string)reader["Tipo"],(decimal)reader["Preco"],(int)reader["Quantidade"]);
                         desconectar();
                         return produto;
                     }
@@ -52,20 +52,76 @@ namespace ShopBr.Controller
         }
         //ANCHOR adicionar funcoes para fazer buscas por tipo
         //ANCHOR adicionar funcão no banco para buscar por tipos
-        public List<Produto> get()
-            {
-                var produtos= new List<Produto>();
-                Cmd.CommandText = "SELECT Id, Nome, Marca, Tipo, Preco, Quantidade FROM Produto ";
-                Cmd.Connection = conectar();
+        public List<Produto> Get()
+        {
+            Cmd.Parameters.Clear();
+            var produtos= new List<Produto>();
+            Cmd.CommandText = "SELECT Id, Nome, Marca, Tipo, Preco, Quantidade FROM Produto ";
+            Cmd.Connection = conectar();
 
-                using(SqlDataReader reader = Cmd.ExecuteReader())
-                {
-                    while(reader.Read()){
-                            produtos.Add(new Produto((Guid)reader["Id"],(string)reader["Nome"],(string)reader["Marca"],(string)reader["Tipo"],(double)reader["Preco"],(int)reader["Quantidade"]));
-                    }
+            using(SqlDataReader reader = Cmd.ExecuteReader())
+            {
+                while(reader.Read()){
+                        produtos.Add(new Produto((Guid)reader["Id"],(string)reader["Nome"],(string)reader["Marca"],(string)reader["Tipo"],(decimal)reader["Preco"],(int)reader["Quantidade"]));
                 }
-                desconectar();
-                return produtos;
             }
+            desconectar();
+            return produtos;
+        }
+        public List<Produto> GetSemLoja(Guid lojaId)
+        {
+            Cmd.Parameters.Clear();
+            var produtos= new List<Produto>();
+            Cmd.CommandText = "SELECT [Produto].Id, [Produto].Nome, [Produto].Marca, [Produto].Tipo, [Produto].Preco, [Produto].Quantidade FROM Produto LEFT JOIN [ProdutoEmLoja] ON Produto.Id != [ProdutoEmLoja].ProdutoId WHERE [ProdutoEmLoja].LojaId = @LojaId OR [ProdutoEmLoja].LojaId is Null";
+            Cmd.Parameters.AddWithValue("@LojaId",lojaId);  
+            Cmd.Connection = conectar();
+
+            using(SqlDataReader reader = Cmd.ExecuteReader())
+            {
+                while(reader.Read()){
+                        produtos.Add(new Produto((Guid)reader["Id"],(string)reader["Nome"],(string)reader["Marca"],(string)reader["Tipo"],(decimal)reader["Preco"],(int)reader["Quantidade"]));
+                }
+            }
+            desconectar();
+            return produtos;
+
+        }
+        public List<Produto> GetNaLoja(Guid lojaId)
+        {
+            Cmd.Parameters.Clear();
+            var produtos= new List<Produto>();
+            Cmd.CommandText = "SELECT [Produto].Id, [Produto].Nome, [Produto].Marca, [Produto].Tipo, [Produto].Preco, [Produto].Quantidade FROM Produto LEFT JOIN [ProdutoEmLoja] ON Produto.Id = [ProdutoEmLoja].ProdutoId WHERE [ProdutoEmLoja].LojaId = @LojaId   ";
+            Cmd.Parameters.AddWithValue("@LojaId",lojaId);  
+            Cmd.Connection = conectar();
+
+            using(SqlDataReader reader = Cmd.ExecuteReader())
+            {
+                while(reader.Read()){
+                        produtos.Add(new Produto((Guid)reader["Id"],(string)reader["Nome"],(string)reader["Marca"],(string)reader["Tipo"],(decimal)reader["Preco"],(int)reader["Quantidade"]));
+                }
+            }
+            desconectar();
+            return produtos;
+
+        }
+        public void RemoveDaLoja( Guid lojaId, Guid produtoId)
+        {
+            Cmd.Parameters.Clear();
+            Cmd.CommandText = "DELETE FROM ProdutoEmLoja WHERE ProdutoId = @Id AND LojaId = @Loja";
+            Cmd.Parameters.AddWithValue("@id",produtoId);
+            Cmd.Parameters.AddWithValue("@loja",lojaId);
+            Cmd.Connection = conectar();
+            Cmd.ExecuteNonQuery();
+            desconectar();
+        }
+        public void adcionarNaLoja(Guid lojaId, Guid produtoId){
+            Cmd.Parameters.Clear();
+            Cmd.CommandText = "insert into ProdutoEmLoja ( LojaId, ProdutoId) values (@IdLoja, @IdProd)";
+            Cmd.Parameters.AddWithValue("@IdLoja",lojaId);
+            Cmd.Parameters.AddWithValue("@IdProd", produtoId);
+            Cmd.Connection = conectar();
+            Cmd.ExecuteNonQuery();
+            desconectar();
+        }
     }
 }

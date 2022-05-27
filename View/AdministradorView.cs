@@ -46,6 +46,8 @@ namespace ShopBr.View
                     AdmCompras.Menu();
                     break;
                 case 4:
+                    var admLoja = new AdmLoja();
+                    admLoja.Menu();
                     break;
                 case 5:
                     var administraAvaliacao = new AdministraAvaliacao();

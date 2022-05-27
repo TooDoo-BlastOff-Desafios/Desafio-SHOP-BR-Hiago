@@ -3,6 +3,7 @@ namespace ShopBr.Model
     public class Loja
     {
 
+ 
         public Loja()
         {
             Id = Guid.NewGuid();

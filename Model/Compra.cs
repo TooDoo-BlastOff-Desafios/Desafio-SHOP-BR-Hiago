@@ -7,7 +7,7 @@ namespace ShopBr.Model
             Cpf = "";
             TipoPagamento = "Cartao";
         }
-        public Compra(string cpf, Guid idProduto, int quantidade, string tipoPagamento, Guid codigoRastreio, double valor)
+        public Compra(string cpf, Guid idProduto, int quantidade, string tipoPagamento, Guid codigoRastreio, decimal valor)
         {
             Cpf = cpf;
             IdProduto = idProduto;
@@ -26,6 +26,6 @@ namespace ShopBr.Model
         public int Quantidade { get; set; }
         public string  TipoPagamento { get; set; }
         public Guid CodigoRastreio { get; set; }
-        public double Valor  { get; set; }
+        public decimal Valor  { get; set; }
     }
 }
