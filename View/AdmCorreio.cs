@@ -10,7 +10,7 @@ namespace ShopBr.View
         {
             Gerenciador = new CCorreio();
         }
-        public CCorreio Gerenciador { get; set; }
+        private CCorreio Gerenciador { get; set; }
         public void Menu()
         {
             Console.Clear();
@@ -23,12 +23,13 @@ namespace ShopBr.View
             switch(option)
             {
                 case 1:
-
+                    CadastrarCorreio();
                     break;
                 case 2:
                     ExcluirCorreios();
                     break;
                 case 3: 
+                    //ANCHOR adicionar função de editar correios
                     break;
             }
             if(option!= 4)

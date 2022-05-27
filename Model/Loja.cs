@@ -2,9 +2,18 @@ namespace ShopBr.Model
 {
     public class Loja
     {
+
+        public Loja()
+        {
+            Id = Guid.NewGuid();
+            Nome = "";
+            Endereco = "";
+            Telefone = "";
+            Email = "";
+        }
         public Loja(string nome, string endereco, string telefone, string email)
         {
-            Id = new Guid();
+            Id = Guid.NewGuid();
             Nome = nome;
             Endereco = endereco;
             Telefone = telefone;
@@ -18,7 +27,11 @@ namespace ShopBr.Model
             Telefone = telefone;
             Email = email;
         }
-    //ANCHOR criar construtor sem email
+        //ANCHOR criar construtor sem email
+        public override string ToString()
+        {
+            return $"Nome: {Nome} Endereco:{Endereco} Telefone:{Telefone} Email:{Email} ";
+        }
         public Guid Id { get; set; }
         public string Nome { get; set; }
         public string Endereco { get; set; }

@@ -42,22 +42,19 @@ namespace ShopBr.View
             Console.WriteLine("Insira seu nome");
             cliente.Nome = Solicitor.GetValidName();
             Console.WriteLine("Insira seu telefone:");
-            //ANCHOR criar solicitor para validar a entrada do telefone
-            cliente.Telefone = Solicitor.GetValidString();
-            //ANCHOR criar solicitor para validar a entrada do cep
+            Console.WriteLine("Siga o modelo 75-988917791");
+            cliente.Telefone = Solicitor.GetValidTelefone();
             Console.WriteLine("Insira seu Cep");
-            cliente.Cep = Solicitor.GetValidString();
-            //ANCHOR criar solicitor para validar a entrada do email
+            cliente.Cep = Solicitor.GetValidCep();
             Console.WriteLine("Insira seu Email");
-            cliente.Email = Solicitor.GetValidString();
-            //ANCHOR criar solicitor para validar a entrada da senha
+            cliente.Email = Solicitor.GetValidEmail();
             Console.WriteLine("Insira sua senha");
             Console.WriteLine("A senha deve conter: ");
             Console.WriteLine("8 caracteres no mínimo");
             Console.WriteLine("1 Letra Maiúscula no mínimo");
             Console.WriteLine("1 Número no mínimo");
             Console.WriteLine("1 Símbolo no mínimo: $*&@#");
-            cliente.Senha = Solicitor.GetValidString();//ANCHOR fazer função get senha
+            cliente.Senha = Solicitor.GetValidSenha();
             manipulator.Adicionar(cliente);
             MenuCliente();
         }

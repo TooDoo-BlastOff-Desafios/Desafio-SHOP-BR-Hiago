@@ -10,7 +10,7 @@ namespace ShopBr.View
         public void Menu(){
             Console.Clear();
             Console.WriteLine("Favor Insira a sua senha");
-            string senha = Solicitor.GetValidString(); //ANCHOR pudar para função de pegar senha
+            string senha = Solicitor.GetValidSenha();
             if(senha == "Ra-23140304")
             {
                 MenuAdministrador();
@@ -34,6 +34,8 @@ namespace ShopBr.View
             switch(option)
             {
                 case 1:
+                    var admCorreio = new AdmCorreio();
+                    admCorreio.Menu();
                     break;
                 case 2:
                     var admCliente = new AdministradorClientes();

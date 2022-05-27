@@ -77,6 +77,46 @@ namespace UserSolicitor{
             Console.WriteLine("cpf Invalido, tente novamente");
             return GetValidCPF();
         }
+        public static string GetValidEmail()
+        {
+            string name = GetValidString();
+            var reg = new Regex(@"/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i");
+            if(reg.IsMatch(name)){
+                return name;
+            }
+            Console.WriteLine("email Invalido, tente novamente");
+            return GetValidEmail();
+        }
+        public static string GetValidSenha()
+        {
+            string name = GetValidString();
+            var reg = new Regex(@"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$");
+            if(reg.IsMatch(name)){
+                return name;
+            }
+            Console.WriteLine("senha Invalida, tente novamente");
+            return GetValidSenha();
+        }
+        public static string GetValidCep()
+        {
+            string name = GetValidString();
+            var reg = new Regex(@"^[0-9]{5}-[0-9]{3}$");
+            if(reg.IsMatch(name)){
+                return name;
+            }
+            Console.WriteLine("cep Invalida, tente novamente");
+            return GetValidCep();
+        }
+        public static string GetValidTelefone()
+        {
+            string name = GetValidString();
+            var reg = new Regex(@"^[0-9]{2}-([0-9]{8}|[0-9]{9})$");
+            if(reg.IsMatch(name)){
+                return name;
+            }
+            Console.WriteLine("cep Invalida, tente novamente");
+            return GetValidTelefone();
+        }
         public static double GetValidDouble()
         {
           double value = 0;

@@ -13,7 +13,7 @@ namespace ShopBr.Model
             Custo = custo;
         }
 
-        public Correio(Guid id, byte prazo, double custo)
+        public Correio(Guid id, int prazo, double custo)
         {
             Id = id;
             Prazo = prazo;
@@ -25,7 +25,7 @@ namespace ShopBr.Model
             return $"Prazo:{Prazo} Custo:{Custo}";
         }
         public Guid Id { get; set; }
-        public byte Prazo { get; set; }
+        public int Prazo { get; set; }
         public double Custo { get; set; }
     }
 }
