@@ -2,9 +2,13 @@ namespace ShopBr.Model
 {
     public class Correio
     {
+        public Correio()
+        {
+            Id = Guid.NewGuid();
+        }
         public Correio(byte prazo, double custo)
         {
-            Id = new Guid();
+            Id =  Guid.NewGuid();
             Prazo = prazo;
             Custo = custo;
         }
@@ -16,6 +20,10 @@ namespace ShopBr.Model
             Custo = custo;
         }
 
+        public override string ToString()
+        {
+            return $"Prazo:{Prazo} Custo:{Custo}";
+        }
         public Guid Id { get; set; }
         public byte Prazo { get; set; }
         public double Custo { get; set; }

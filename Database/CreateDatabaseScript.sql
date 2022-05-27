@@ -31,7 +31,6 @@ CREATE TABLE [ProdutoEmLoja]
 (
     [LojaId] UNIQUEIDENTIFIER NOT NULL,
     [ProdutoId] UNIQUEIDENTIFIER NOT NULL,
-    [Quantidade] INT NOT NULL
 
     CONSTRAINT [PK_ProdutoEmLoja] PRIMARY KEY ([LojaId], [ProdutoId]),
     CONSTRAINT [FK_Produto] FOREIGN KEY ([ProdutoId]) REFERENCES Produto ([Id]),
@@ -45,7 +44,6 @@ CREATE TABLE [Cliente]
 (
     [CPF] NVARCHAR(14)  NOT NULL,
     [Nome] NVARCHAR(80) NOT NULL,   
-    [Endereco] NVARCHAR(120) NOT NULL,
     [Telefone] NVARCHAR(13) ,
     [CEP] NVARCHAR(9) NOT NULL,
     [Email] NVARCHAR(120) NOT NULL ,

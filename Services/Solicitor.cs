@@ -170,6 +170,11 @@ namespace UserSolicitor{
             //ANCHOR melhorar tramento de data e limitar espaço de tempo
             return birthDate;
         }
+        public static void Parada()
+        {
+            Console.WriteLine("Presione qualquer tecla para prosseguir");
+            Console.ReadKey();
+        }
     } 
 
 }

@@ -10,7 +10,7 @@ namespace ShopBr.Controller
         public CCorreio()
         {
         }
-        public void adcionar(Correio correio){
+        public void Adcionar(Correio correio){
             Cmd.CommandText = "insert into Correio ( Prazo, CustoFrete) values (@Prazo, @CustoFrete)";
             Cmd.Parameters.AddWithValue("@Prazo",correio.Prazo);
             Cmd.Parameters.AddWithValue("@CustoFrete",correio.Custo);
@@ -19,7 +19,7 @@ namespace ShopBr.Controller
             desconectar();
         }
 
-        public void remove(Guid id)
+        public void Remove(Guid id)
         {
             Cmd.CommandText = "DELETE FROM Correio WHERE Id = @Id";
             Cmd.Parameters.AddWithValue("@id",id);
@@ -28,7 +28,7 @@ namespace ShopBr.Controller
             desconectar();
         }
 
-        public Correio getById(Guid id)
+        public Correio GetById(Guid id)
         {
             Cmd.CommandText = "SELECT Id, Prazo, CustoFrete FROM Correio WHERE Id = @Id";
             Cmd.Parameters.AddWithValue("@id",id);  
@@ -49,8 +49,9 @@ namespace ShopBr.Controller
             throw new Exception("Não foi possivel encontrar este correio");
         }
 
-        public List<Correio> get()
+        public List<Correio> Get()
         {
+            Cmd.Parameters.Clear();
             var correios= new List<Correio>();
             Cmd.CommandText = "SELECT Id, Prazo, CustoFrete FROM Correio ";
             Cmd.Connection = conectar();

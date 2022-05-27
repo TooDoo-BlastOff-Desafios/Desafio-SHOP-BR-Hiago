@@ -31,6 +31,7 @@ namespace ShopBr.Controller
         }
         public Produto getById(Guid id)
         {
+            Cmd.Parameters.Clear();
             Cmd.CommandText = "SELECT Id, Nome, Marca, Tipo, Preco, Quantidade FROM Produto WHERE Id = @Id";
             Cmd.Parameters.AddWithValue("@id",id);  
             Cmd.Connection = conectar();

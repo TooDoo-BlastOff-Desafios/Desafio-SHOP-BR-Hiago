@@ -7,7 +7,7 @@ CREATE OR ALTER PROCEDURE [spAddCompra]
  @CodigoCorreio UNIQUEIDENTIFIER
  AS
     DECLARE @ExisteCorreio UNIQUEIDENTIFIER
-    DECLARE @ExistePessoaProduto UNIQUEIDENTIFIER
+    DECLARE @ExistePessoaProduto NVARCHAR(14)
     DECLARE @ValidaQuantidade UNIQUEIDENTIFIER
     SELECT @ExisteCorreio = Id FROM Correio WHERE Id = @CodigoCorreio
     IF @ExisteCorreio = NULL
@@ -26,11 +26,14 @@ CREATE OR ALTER PROCEDURE [spAddCompra]
                     SELECT 'Compra não realizada, CPF ou Produto inválido' AS retorno
                 END
             ELSE    
-                SELECT @ValidaQuantidade = [Produto].[Id] From [Produto] WHERE [Produto].[Quantidade] >= @Quantidade 
-                IF @ValidaQuantidade != NULL
+                SELECT @ValidaQuantidade = [Produto].[Id] From [Produto] WHERE [Produto].[Quantidade] <= @Quantidade 
+                IF @ValidaQuantidade = NULL
+                BEGIN
+                    SELECT 'Compra não realizada, quantidade insuficiente' AS retorno
+                END
+                ELSE
                 BEGIN
                     INSERT INTO [Compra](ProdutoId, ClienteId, CorreioId, Valor,Quantidade, TipoPagamento) VALUES (@ProdutoId, @CPF, @CodigoCorreio, @Valor, @Quantidade, @TipoPagamento)
                     SELECT '“Compra realizada com sucesso' AS retorno
                 END
-                ELSE
-                    SELECT 'Compra não realizada, quantidade insuficiente' AS retorno
+            

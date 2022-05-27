@@ -41,8 +41,6 @@ namespace ShopBr.View
             cliente.Cpf = Solicitor.GetValidCPF();
             Console.WriteLine("Insira seu nome");
             cliente.Nome = Solicitor.GetValidName();
-            Console.WriteLine("Insira seu endereco");
-            cliente.Endereco = Solicitor.GetValidString();//ANCHOR melhorar função get valid string para não aceitar strings vazias
             Console.WriteLine("Insira seu telefone:");
             //ANCHOR criar solicitor para validar a entrada do telefone
             cliente.Telefone = Solicitor.GetValidString();
@@ -89,8 +87,8 @@ namespace ShopBr.View
             switch(option)
             {
                 case 1:
-                    //ANCHOR criar função de realizar compra;
-                    //ANCHOR fazer menu fora da classe que receba o cpf do cliente
+                    var compra = new ClienteCompras(cliente.Cpf);
+                    compra.MenuCompra();
                     break;
                 case 2:
                     break;

@@ -10,11 +10,11 @@ namespace ShopBr.Controller
         }
         public string Adicionar(Compra compra)
         {
-            Cmd.CommandText = "EXEC spAddCompra @Cpf, @ProdutoId, @Quantidade, @Valor, @TipoPagamento, @CodigoCorreio ";
+            Cmd.CommandText = "EXEC dbo.spAddCompra @Cpf, @ProdutoId, @Quantidade, @Valor, @TipoPagamento, @CodigoCorreio ";
             Cmd.Parameters.AddWithValue("@Cpf",  compra.Cpf);
             Cmd.Parameters.AddWithValue("@ProdutoId",compra.IdProduto);
             Cmd.Parameters.AddWithValue("@Quantidade",compra.Quantidade);
-            Cmd.Parameters.AddWithValue("@Valor",compra.Valor);
+            Cmd.Parameters.AddWithValue("@Valor",(float)compra.Valor);
             Cmd.Parameters.AddWithValue("@TipoPagamento",compra.TipoPagamento);
             Cmd.Parameters.AddWithValue("@CodigoCorreio", compra.CodigoRastreio);
             Cmd.Connection = conectar();

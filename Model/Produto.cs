@@ -30,6 +30,10 @@ namespace ShopBr.Model
             Preco = preco;
             Quantidade = quantidade;
         }
+        public override string ToString()
+        {
+            return $"Nome: {Nome} Marca:{Marca} Tipo:{Tipo} Preço:{Preco} Quantidade disponivel: {Quantidade}";
+        }
 
         public Guid Id { get; set; }
         public string Nome { get; set; }

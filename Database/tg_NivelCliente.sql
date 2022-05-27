@@ -1,3 +1,4 @@
+
 CREATE TRIGGER [tg_ClientNivel] 
 ON [Compra]
 FOR INSERT
@@ -15,11 +16,10 @@ BEGIN
     WHERE
     [ClienteId] = @CPF
 
-    EXECUTE [spGetNivel] @NumeroCompras, @Nivel =  @NivelCliente OUTPUT;
     UPDATE 
         [CLiente]
     SET
-        [Nivel] = @NivelCLiente
+        [Nivel] = dbo.funcGetNivel(@NumeroCompras)
     WHERE 
         [CPF] = @CPF
     

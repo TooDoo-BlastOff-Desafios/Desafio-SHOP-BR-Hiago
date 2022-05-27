@@ -35,7 +35,9 @@ namespace ShopBr.View
             {
                 case 1:
                     break;
-                case 2: 
+                case 2:
+                    var admCliente = new AdministradorClientes();
+                    admCliente.Menu(); 
                     break;
                 case 3:
                     break;
