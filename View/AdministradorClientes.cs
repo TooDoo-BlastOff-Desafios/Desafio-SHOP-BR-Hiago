@@ -13,6 +13,7 @@ namespace ShopBr.View
 
         public void Menu()
         {
+            Console.Clear();
             Console.WriteLine("Clientes");
             List<Cliente> clientes = Gerenciador.Get();
             int contador = 0;
@@ -23,9 +24,8 @@ namespace ShopBr.View
             } 
             if(contador >0){
                 Console.WriteLine("1- Para excluir um cliente ");
-                Console.WriteLine("2- Para Editar os Dados de um cliente");
-                Console.WriteLine("3- Para sair para o menu");
-                var option = Solicitor.GetByteInterval(1,3);
+                Console.WriteLine("2- Para sair para o menu");
+                var option = Solicitor.GetByteInterval(1,2);
                 if(option == 1 || option == 2)
                 {
                     Console.WriteLine("Insira o numero do cliente ");

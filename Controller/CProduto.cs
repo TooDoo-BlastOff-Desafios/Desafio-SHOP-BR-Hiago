@@ -33,6 +33,12 @@ namespace ShopBr.Controller
             Cmd.ExecuteNonQuery();
             desconectar();
             Cmd.Parameters.Clear();
+            Cmd.CommandText = "DELETE FROM ProdutoEmLoja WHERE ProdutoId = @Id";
+            Cmd.Parameters.AddWithValue("@id",id);
+            Cmd.Connection = conectar();
+            Cmd.ExecuteNonQuery();
+            desconectar();
+            Cmd.Parameters.Clear();
             Cmd.CommandText = "DELETE FROM Compra WHERE ProdutoId = @Id";
             Cmd.Parameters.AddWithValue("@id",id);
             Cmd.Connection = conectar();

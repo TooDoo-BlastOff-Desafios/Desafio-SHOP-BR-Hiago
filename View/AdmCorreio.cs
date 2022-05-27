@@ -17,8 +17,7 @@ namespace ShopBr.View
             Console.WriteLine("Correios");
             Console.WriteLine("1- Para cadastrar um novo Correio");
             Console.WriteLine("2- Para Excluir um correio");
-            Console.WriteLine("3- Para editar um correio");
-            Console.WriteLine("4- Para sair para o menu");
+            Console.WriteLine("3- Para sair para o menu");
             var option = Solicitor.GetByteInterval(1,4);
             switch(option)
             {
@@ -28,11 +27,9 @@ namespace ShopBr.View
                 case 2:
                     ExcluirCorreios();
                     break;
-                case 3: 
-                    //ANCHOR adicionar função de editar correios
-                    break;
+
             }
-            if(option!= 4)
+            if(option!= 3)
                 Menu();
 
         }

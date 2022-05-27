@@ -18,10 +18,9 @@ namespace ShopBr.View
             Console.WriteLine("Correios");
             Console.WriteLine("1- Para cadastrar um nova Loja");
             Console.WriteLine("2- Para Excluir uma Loja");
-            Console.WriteLine("3- Para editar uma loja");
-            Console.WriteLine("4- Adicionar Produtos");
-            Console.WriteLine("5- Para remover Produtos");
-            Console.WriteLine("6- Para sair para o menu");
+            Console.WriteLine("3- Adicionar Produtos");
+            Console.WriteLine("4- Para remover Produtos");
+            Console.WriteLine("5- Para sair para o menu");
             var option = Solicitor.GetByteInterval(1,6);
             switch(option)
             {
@@ -30,19 +29,15 @@ namespace ShopBr.View
                     break;
                 case 2:
                     ExcluirLoja();
-                    //ANCHOR tratar em produto em loja
                     break;
-                case 3: 
-                    //ANCHOR adicionar função de editar Loja
-                    break;
-                case 4:
+                case 3:
                     try{
                         AddProduto(SelectLoja());
                     }catch(Exception ex){
                         Console.WriteLine(ex.Message);
                     }
                     break;
-                case 5:
+                case 4:
                     try{
                         RemoveProduto(SelectLoja());
                     }catch(Exception ex){
@@ -51,7 +46,7 @@ namespace ShopBr.View
                     break;
 
             }
-            if(option!= 6)
+            if(option!= 5)
                 Menu();
 
         }
