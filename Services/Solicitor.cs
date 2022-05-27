@@ -80,7 +80,7 @@ namespace UserSolicitor{
         public static string GetValidEmail()
         {
             string name = GetValidString();
-            var reg = new Regex(@"/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i");
+            var reg = new Regex(@"^[a-z0-9.]{2,}@[a-z0-9]{3,}\.[a-z]+(\.([a-z]+))?$");
             if(reg.IsMatch(name)){
                 return name;
             }

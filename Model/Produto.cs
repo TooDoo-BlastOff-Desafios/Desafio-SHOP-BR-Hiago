@@ -11,7 +11,7 @@ namespace ShopBr.Model
             Tipo = "";
 
         }
-        public Produto(string nome, string marca, string tipo, decimal preco, int quantidade)
+        public Produto(string nome, string marca, string tipo, double preco, int quantidade)
         {
             Id = Guid.NewGuid();
             Nome = nome;
@@ -21,7 +21,7 @@ namespace ShopBr.Model
             Quantidade = quantidade;
         }
 
-        public Produto(Guid id, string nome, string marca, string tipo, decimal preco, int quantidade)
+        public Produto(Guid id, string nome, string marca, string tipo, double preco, int quantidade)
         {
             Id = id;
             Nome = nome;
@@ -39,7 +39,7 @@ namespace ShopBr.Model
         public string Nome { get; set; }
         public string Marca {get; set;}
         public string Tipo { get; set; }
-        public decimal Preco { get; set; }
+        public double Preco { get; set; }
         public int Quantidade{ get; set; }
     }
 }

@@ -10,6 +10,7 @@ namespace ShopBr.Controller
         }
         public string Adicionar(Compra compra)
         {
+            Cmd.Parameters.Clear();
             Cmd.CommandText = "EXEC dbo.spAddCompra @Cpf, @ProdutoId, @Quantidade, @Valor, @TipoPagamento, @CodigoCorreio ";
             Cmd.Parameters.AddWithValue("@Cpf",  compra.Cpf);
             Cmd.Parameters.AddWithValue("@ProdutoId",compra.IdProduto);
@@ -31,7 +32,7 @@ namespace ShopBr.Controller
         public void RemoveByIds(string clienteid, Guid produtoid)
         {
             Cmd.Parameters.Clear();
-            Cmd.CommandText = "DELETE FROM Compra WHERE ClientId = @Id AND ProdutoId = @Produto";
+            Cmd.CommandText = "DELETE FROM Compra WHERE ClienteId = @Id AND ProdutoId = @Produto";
             Cmd.Parameters.AddWithValue("@id",clienteid);
             Cmd.Parameters.AddWithValue("@Produto",produtoid);
             Cmd.Connection = conectar();
@@ -49,7 +50,7 @@ namespace ShopBr.Controller
             using(SqlDataReader reader = Cmd.ExecuteReader())
             {
                 while(reader.Read()){
-                        compras.Add(new Compra((string)reader["ClienteId"], (Guid)reader["ProdutoId"], (int)reader["Quantidade"], (string)reader["TipoPagamento"], (Guid)reader["CorreioId"], (decimal)reader["valor"]));
+                        compras.Add(new Compra((string)reader["ClienteId"], (Guid)reader["ProdutoId"], (int)reader["Quantidade"], (string)reader["TipoPagamento"], (Guid)reader["CorreioId"], (double)reader["valor"]));
                 }
             }
             desconectar();

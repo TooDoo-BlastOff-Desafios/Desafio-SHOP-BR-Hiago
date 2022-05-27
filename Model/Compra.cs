@@ -7,7 +7,7 @@ namespace ShopBr.Model
             Cpf = "";
             TipoPagamento = "Cartao";
         }
-        public Compra(string cpf, Guid idProduto, int quantidade, string tipoPagamento, Guid codigoRastreio, decimal valor)
+        public Compra(string cpf, Guid idProduto, int quantidade, string tipoPagamento, Guid codigoRastreio, double valor)
         {
             Cpf = cpf;
             IdProduto = idProduto;
@@ -16,12 +16,16 @@ namespace ShopBr.Model
             CodigoRastreio = codigoRastreio;
             Valor = valor;
         }
+        public override string ToString()
+        {
+            return $"Cpf do cliente: {Cpf} Valor: {Valor} Quantidade: {Quantidade} ";
+        }
 
         public string Cpf  { get; set; }
         public Guid IdProduto { get; set; }
         public int Quantidade { get; set; }
         public string  TipoPagamento { get; set; }
         public Guid CodigoRastreio { get; set; }
-        public decimal Valor  { get; set; }
+        public double Valor  { get; set; }
     }
 }

@@ -41,7 +41,7 @@ namespace ShopBr.Controller
             {
                 if(reader.Read()){
                     if((Guid)reader["Id"]== id){
-                        produto = new Produto((Guid)reader["Id"],(string)reader["Nome"],(string)reader["Marca"],(string)reader["Tipo"],(decimal)reader["Preco"],(int)reader["Quantidade"]);
+                        produto = new Produto((Guid)reader["Id"],(string)reader["Nome"],(string)reader["Marca"],(string)reader["Tipo"],(double)reader["Preco"],(int)reader["Quantidade"]);
                         desconectar();
                         return produto;
                     }
@@ -61,7 +61,7 @@ namespace ShopBr.Controller
                 using(SqlDataReader reader = Cmd.ExecuteReader())
                 {
                     while(reader.Read()){
-                            produtos.Add(new Produto((Guid)reader["Id"],(string)reader["Nome"],(string)reader["Marca"],(string)reader["Tipo"],(decimal)reader["Preco"],(int)reader["Quantidade"]));
+                            produtos.Add(new Produto((Guid)reader["Id"],(string)reader["Nome"],(string)reader["Marca"],(string)reader["Tipo"],(double)reader["Preco"],(int)reader["Quantidade"]));
                     }
                 }
                 desconectar();

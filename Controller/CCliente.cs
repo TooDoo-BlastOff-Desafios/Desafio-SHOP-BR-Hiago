@@ -34,6 +34,7 @@ namespace ShopBr.Controller
             using (SqlDataReader reader = Cmd.ExecuteReader())
             {
                 if(reader.Read())
+                    desconectar();
                     return true;
             }
             return false;

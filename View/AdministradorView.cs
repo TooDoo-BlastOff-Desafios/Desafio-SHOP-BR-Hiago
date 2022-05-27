@@ -11,7 +11,7 @@ namespace ShopBr.View
             Console.Clear();
             Console.WriteLine("Favor Insira a sua senha");
             string senha = Solicitor.GetValidSenha();
-            if(senha == "Ra-23140304")
+            if(senha == "Ra#23140304")
             {
                 MenuAdministrador();
             }else{
@@ -42,6 +42,8 @@ namespace ShopBr.View
                     admCliente.Menu(); 
                     break;
                 case 3:
+                    var AdmCompras = new AdmCompras();
+                    AdmCompras.Menu();
                     break;
                 case 4:
                     break;

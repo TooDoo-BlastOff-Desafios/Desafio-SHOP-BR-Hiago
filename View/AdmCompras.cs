@@ -18,7 +18,7 @@ namespace ShopBr.View
             List<Compra> compras = Gerenciador.Get();
             foreach(Compra compra in compras)
             {
-                Console.WriteLine($"{contador} {compra}}");
+                Console.WriteLine($"{contador} {compra}");
                 contador+=1;
             }
             if(contador>0)
@@ -33,5 +33,6 @@ namespace ShopBr.View
                     Gerenciador.RemoveByIds(compras[remover].Cpf, compras[remover].IdProduto);
                 }   
             }
+        }
     }
 }
